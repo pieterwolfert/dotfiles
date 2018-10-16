@@ -1,0 +1,3 @@
+*.pyc
+nvim/.config/nvim/*
+!nvim/.config/nvim/init.vim
