@@ -14,7 +14,7 @@ bindsym $mod+Ctrl+l exec i3lock -c "000000"
 
 #make a screenshot
 bindsym --release Print exec $HOME/bin/scr
-bindsym Shift+Print exec $HOME/bin/scr
+bindsym Shift+Print exec $HOME/bin/scr window
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run -fn "Monospace-12:normal"
