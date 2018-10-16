@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -i
 [ "$#" -eq 1 ] && CROP="$(slop -t 0 -f "-crop %g")"
 URL="scr/$(date +%F_%H-%M-%S).png"
 import -window root $CROP png:- | \
