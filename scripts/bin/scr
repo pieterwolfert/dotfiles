@@ -1,0 +1,14 @@
+#!/bin/sh -e
+[ "$#" -eq 1 ] && CROP="$(slop -t 0 -f "-crop %g")"
+URL="scr/$(date +%F_%H-%M-%S).png"
+import -window root $CROP png:- | \
+	ssh tyrion cat \> /var/www/tyrion.pieterwolfert.com/public_html/$URL
+EDITED="https://tyrion.pieterwolfert.com/$URL"
+curl -F url=$EDITED -F type=regular -F token=pieter https://shorten.pw |  xclip -selection c
+
+
+
+#echo "$(curl -s -F url="https://tyrion.pieterwolfert.com/$URL" -F token="pieter" -F type="regular" shorten.pw)" | xclip -selection c
+#SHORT=$(echo "https://tyrion.pieterwolfert.com/$URL")
+#SHORE=$(curl -s -F url="$SHORT" -F token="pieter" -F type="regular" shorten.pw)
+#echo $SHORE | xclip -selection c

@@ -12,6 +12,10 @@ bindsym $mod+z exec firefox
 
 bindsym $mod+Ctrl+l exec i3lock -c "000000"
 
+#make a screenshot
+bindsym --release Print exec $HOME/bin/scr
+bindsym Shift+Print exec $HOME/bin/scr
+
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run -fn "Monospace-12:normal"
 # There also is the (new) i3-dmenu-desktop which only displays applications
