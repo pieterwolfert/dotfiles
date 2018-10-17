@@ -27,6 +27,27 @@ primary = ${xrdb:color1:#222}
 secondary = ${xrdb:color3:#222}
 alert = ${xrdb:color4:#222}
 
+[bar/bottom]
+monitor = ${env:MONITOR:}
+width = 100%
+height = 20
+bottom = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 1
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+modules-left = i3 
+modules-right = filesystem pulseaudio eth 
+
+font-0 = DejaVu Sans Mono for Powerline:pixelsize=10:autohint=true:antialias=true;1
+tray-position = right
+
 [bar/example]
 monitor = ${env:MONITOR:}
 width = 100%
@@ -52,10 +73,12 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = DejaVu Sans Mono for Powerline:pixelsize=10:autohint=true:antialias=true;1
-font-1 = FontAwesome:size=10:autohint=true:antialias=true;1
+font-1 = Siji:pixelsize=11;1
+font-2 = Roboto:size=11:weight=bold;2
+font-3 = Noto Sans:size=11;1
 
-modules-left = i3 powermenu
-modules-right = filesystem pulseaudio xkeyboard memory cpu wlan eth battery temperature date
+modules-left = quodlibet
+modules-right = xkeyboard memory cpu temperature date
 
 tray-position = right
 tray-padding = 2
@@ -101,8 +124,10 @@ type = internal/fs
 interval = 25
 
 mount-0 = /
+mount-1 = /mnt/disk1
+mount-2 = /mnt/disk2
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_free%% of %total%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -198,6 +223,16 @@ bar-empty = ─
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
 
+[module/quodlibet]
+type = custom/script
+exec = python3.6 ~/bin/ql.py
+exec-if = pgrep quodlibet || pgrep spotify
+format = <label>
+interval = 0.2
+label = %output%
+; label-foreground = ${colors.foreground-alt}
+label-foreground = #fff
+
 [module/backlight-acpi]
 inherit = module/xbacklight
 type = internal/backlight
@@ -243,7 +278,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = enp0s31f6
+interface = enp5s0
 interval = 3.0
 
 format-connected-underline = #55aa55
@@ -371,6 +406,8 @@ format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
+hwon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon0/temp1_input
+
 label = %temperature-c%
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.secondary}
@@ -421,3 +458,4 @@ margin-top = 5
 margin-bottom = 5
 
 ; vim:ft=dosini
+
